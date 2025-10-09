@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Warga</title>
+    <style>
+        body {
+            background: #e0f7fa;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 24px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+        }
+        h2 {
+            color: #00bcd4;
+            margin-bottom: 32px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        .card-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+        .card {
+            background: #e0f7fa;
+            border: 1px solid #b2ebf2;
+            border-radius: 12px;
+            padding: 20px;
+            width: 320px;
+            box-shadow: 0 2px 8px rgba(0,188,212,0.08);
+            transition: box-shadow 0.2s;
+        }
+        .card:hover {
+            box-shadow: 0 6px 24px rgba(0,188,212,0.18);
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #0097a7;
+            margin-bottom: 12px;
+        }
+        .card p {
+            margin: 8px 0;
+        }
+        .card strong {
+            color: #00796b;
+        }
+        .empty {
+            text-align: center;
+            color: #0097a7;
+            font-size: 1.1em;
+            margin-top: 40px;
+        }
+        .detail-link {
+            display: inline-block;
+            margin-top: 12px;
+            color: #00bcd4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .detail-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Daftar Warga</h2>
+        <div class="card-list">
+            {% for warga in object_list %}
+            <div class="card">
+                <h3>{{ warga.nama_lengkap }}</h3>
+                <p><strong>NIK:</strong> {{ warga.nik }}</p>
+                <p><strong>Alamat:</strong> {{ warga.alamat }}</p>
+                <p><strong>No. Telepon:</strong> {{ warga.no_telepon }}</p>
+                <a href="{% url 'warga_detail' warga.pk %}" class="detail-link">Lihat Detail</a>
+            </div>
+            {% empty %}
+            <div class="empty">Tidak ada data warga.</div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

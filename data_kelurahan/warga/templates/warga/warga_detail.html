@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Warga</title>
+    <style>
+        body {
+            background: #e0f7fa;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 32px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+        }
+        h2 {
+            color: #00bcd4;
+            margin-bottom: 32px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        .detail {
+            background: #e0f7fa;
+            border: 1px solid #b2ebf2;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,188,212,0.08);
+        }
+        .detail p {
+            margin: 12px 0;
+            font-size: 1.1em;
+        }
+        .detail strong {
+            color: #00796b;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 24px;
+            color: #00bcd4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Detail Warga</h2>
+        <div class="detail">
+            <p><strong>Nama Lengkap:</strong> {{ object.nama_lengkap }}</p>
+            <p><strong>NIK:</strong> {{ object.nik }}</p>
+            <p><strong>Alamat:</strong> {{ object.alamat }}</p>
+            <p><strong>No. Telepon:</strong> {{ object.no_telepon }}</p>
+            <p><strong>Tanggal Registrasi:</strong> {{ object.tanggal_registrasi|date:"d M Y H:i" }}</p>
+        </div>
+        <a href="{% url 'warga_list' %}" class="back-link">← Kembali ke Daftar Warga</a>
+    </div>
+</body>
+</html>
