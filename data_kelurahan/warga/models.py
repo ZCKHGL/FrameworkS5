@@ -15,6 +15,11 @@ class Warga(models.Model):
     alamat = models.TextField(
         verbose_name="Alamat Tinggal"
     )
+    tanggal_lahir = models.DateField(
+        blank=True,
+        null=True,
+        verbose_name="Tanggal Lahir"
+    )
     no_telepon = models.CharField(
         max_length=15,
         blank=True,

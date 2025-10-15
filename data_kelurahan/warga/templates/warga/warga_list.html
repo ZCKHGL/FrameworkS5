@@ -20,12 +20,26 @@
             border-radius: 16px;
             box-shadow: 0 4px 24px rgba(0,0,0,0.07);
         }
-        h2 {
+        h1, h2 {
             color: #00bcd4;
-            margin-bottom: 32px;
+            margin-bottom: 16px;
             text-align: center;
             letter-spacing: 1px;
         }
+        .top-actions {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        .top-actions a {
+            display: inline-block;
+            background: #00bcd4;
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .top-actions a:hover { background: #00a4b4; }
         .card-list {
             display: flex;
             flex-wrap: wrap;
@@ -75,7 +89,12 @@
 </head>
 <body>
     <div class="container">
-        <h2>Daftar Warga</h2>
+        <h1>Daftar Warga</h1>
+        <div class="top-actions">
+            <a href="{% url 'warga_add' %}">Tambah Warga Baru</a>
+            <a href="{% url 'pengaduan_add' %}" style="margin-left:12px;">Buat Pengaduan Baru</a>
+        </div>
+        <hr>
         <div class="card-list">
             {% for warga in object_list %}
             <div class="card">
@@ -83,6 +102,9 @@
                 <p><strong>NIK:</strong> {{ warga.nik }}</p>
                 <p><strong>Alamat:</strong> {{ warga.alamat }}</p>
                 <p><strong>No. Telepon:</strong> {{ warga.no_telepon }}</p>
+                {% if warga.tanggal_lahir %}
+                <p><strong>Tanggal Lahir:</strong> {{ warga.tanggal_lahir|date:"d M Y" }}</p>
+                {% endif %}
                 <a href="{% url 'warga_detail' warga.pk %}" class="detail-link">Lihat Detail</a>
             </div>
             {% empty %}
