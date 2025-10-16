@@ -89,10 +89,17 @@
 </head>
 <body>
     <div class="container">
+        {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div style="padding:8px; margin-bottom:8px; background:#e6fffa; border-radius:6px;">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
         <h1>Daftar Warga</h1>
         <div class="top-actions">
             <a href="{% url 'warga_add' %}">Tambah Warga Baru</a>
-            <a href="{% url 'pengaduan_add' %}" style="margin-left:12px;">Buat Pengaduan Baru</a>
+            <a href="{% url 'pengaduan_list' %}" style="margin-left:12px;">Lihat Daftar Pengaduan</a>
         </div>
         <hr>
         <div class="card-list">

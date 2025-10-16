@@ -54,7 +54,18 @@
 </head>
 <body>
     <div class="container">
-        <h2>Detail Warga</h2>
+        {% if messages %}
+        <div>
+            {% for message in messages %}
+                <div style="padding:8px; margin-bottom:8px; background:#fff3cd; border-radius:6px;">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <h2>Detail Warga: {{ object.nama_lengkap }}</h2>
+        <div style="text-align:center; margin-bottom:12px;">
+            <a href="{% url 'warga_edit' object.pk %}" class="btn" style="background:#00bcd4; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none; font-weight:700; margin-right:8px;">Edit Data</a>
+            <a href="{% url 'warga_delete' object.pk %}" class="btn" style="background:#e53935; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none; font-weight:700;" onclick="return confirm('Anda yakin ingin menghapus data ini?');">Hapus Data</a>
+        </div>
         <div class="detail">
             <p><strong>Nama Lengkap:</strong> {{ object.nama_lengkap }}</p>
             <p><strong>NIK:</strong> {{ object.nik }}</p>

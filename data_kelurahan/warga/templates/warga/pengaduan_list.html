@@ -66,6 +66,10 @@
 <body>
     <div class="container">
         <h2>Daftar Pengaduan Warga</h2>
+        <div style="text-align:center; margin-bottom:12px;">
+            <a href="{% url 'pengaduan_add' %}" style="display:inline-block; background:#00bcd4; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none; font-weight:600; margin-right:8px;">Tambah Pengaduan Baru</a>
+            <a href="{% url 'warga_list' %}" style="display:inline-block; background:#00bcd4; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none; font-weight:600;">Lihat Daftar Warga</a>
+        </div>
         <div class="card-list">
             {% for pengaduan in pengaduan_list %}
             <div class="card">
@@ -74,6 +78,10 @@
                 <p><strong>Status:</strong> {{ pengaduan.get_status_display }}</p>
                 <p><strong>Tanggal:</strong> {{ pengaduan.tanggal_pengaduan|date:"d M Y H:i" }}</p>
                 <p>{{ pengaduan.isi|truncatewords:20 }}</p>
+                <div style="margin-top:10px;">
+                    <a href="{% url 'pengaduan_edit' pengaduan.pk %}" style="display:inline-block; background:#00bcd4; color:#fff; padding:6px 10px; border-radius:8px; text-decoration:none; font-weight:700; margin-right:8px;">Edit</a>
+                    <a href="{% url 'pengaduan_delete' pengaduan.pk %}" style="display:inline-block; background:#e53935; color:#fff; padding:6px 10px; border-radius:8px; text-decoration:none; font-weight:700;" onclick="return confirm('Anda yakin ingin menghapus pengaduan ini?');">Hapus</a>
+                </div>
             </div>
             {% empty %}
             <div class="empty">Tidak ada pengaduan.</div>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Konfirmasi Hapus Pengaduan</title>
+    <style>
+        body { background:#ffecec; font-family: 'Segoe UI', Arial, sans-serif; color:#333; margin:0; }
+        .container { max-width:600px; margin:60px auto; background:#fff; padding:24px; border-radius:12px; box-shadow:0 6px 30px rgba(0,0,0,0.08); }
+        h1 { color:#e53935; text-align:center; margin-bottom:18px; }
+        p { font-size:1.05em; color:#444; }
+        .actions { text-align:center; margin-top:20px; }
+        .btn { display:inline-block; padding:10px 16px; border-radius:8px; font-weight:700; text-decoration:none; color:#fff; border:none; cursor:pointer; }
+        .btn.cancel { background:#0097a7; margin-right:10px; }
+        .btn.delete { background:#e53935; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hapus Pengaduan</h1>
+        <p>Anda yakin ingin menghapus pengaduan <strong>{{ object.judul }}</strong> oleh <strong>{{ object.pelapor.nama_lengkap }}</strong>?</p>
+        <form method="post" class="actions">
+            {% csrf_token %}
+            <a href="{% url 'pengaduan_list' %}" class="btn cancel">Batal</a>
+            <button type="submit" class="btn delete">Konfirmasi Hapus</button>
+        </form>
+    </div>
+</body>
+</html>
