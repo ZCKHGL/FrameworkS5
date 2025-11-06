@@ -5,6 +5,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Warga, Pengaduan
 from django.urls import reverse_lazy
 from .forms import WargaForm, PengaduanForm
+# DRF imports for API views
+from rest_framework.generics import ListAPIView, RetrieveAPIView
+from .serializer import WargaSerializer
 
 # Create your views here.
 class WargaListView(ListView):
@@ -87,3 +90,15 @@ class PengaduanDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         obj = self.get_object()
         messages.success(request, f"Pengaduan '{obj.judul}' berhasil dihapus.")
         return super().delete(request, *args, **kwargs)
+
+
+# --- API VIEWS ---
+class WargaListAPIView(ListAPIView):
+    queryset = Warga.objects.all()
+    serializer_class = WargaSerializer
+
+
+class WargaDetailAPIView(RetrieveAPIView):
+    """API endpoint that returns detail for a single Warga by PK."""
+    queryset = Warga.objects.all()
+    serializer_class = WargaSerializer
