@@ -5,8 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Warga, Pengaduan
 from django.urls import reverse_lazy
 from .forms import WargaForm, PengaduanForm
-# DRF imports for API views
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework import viewsets  # Impor viewsets untuk DRF
 from .serializer import WargaSerializer, PengaduanSerializer
 
 # Create your views here.
@@ -93,22 +92,37 @@ class PengaduanDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 # --- API VIEWS ---
-class WargaListAPIView(ListAPIView):
-    queryset = Warga.objects.all()
+# Commented out old Warga API classes replaced by a single ViewSet
+# class WargaListAPIView(ListAPIView):
+#     queryset = Warga.objects.all()
+#     serializer_class = WargaSerializer
+
+
+# class WargaDetailAPIView(RetrieveAPIView):
+#     """API endpoint that returns detail for a single Warga by PK."""
+#     queryset = Warga.objects.all()
+#     serializer_class = WargaSerializer
+
+class WargaViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Warga.objects.all().order_by('-tanggal_registrasi')
     serializer_class = WargaSerializer
 
-
-class WargaDetailAPIView(RetrieveAPIView):
-    """API endpoint that returns detail for a single Warga by PK."""
-    queryset = Warga.objects.all()
-    serializer_class = WargaSerializer
-
-class PengaduanListAPIView(ListAPIView):
-    queryset = Pengaduan.objects.all()
+class PengaduanViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Pengaduan.objects.all().order_by('-id')
     serializer_class = PengaduanSerializer
 
+#class PengaduanListAPIView(ListAPIView):
+#    queryset = Pengaduan.objects.all()
+#    serializer_class = PengaduanSerializer
 
-class PengaduanDetailAPIView(RetrieveAPIView):
-    """API endpoint that returns detail for a single Pengaduan by PK."""
-    queryset = Pengaduan.objects.all()
-    serializer_class = PengaduanSerializer
+
+#class PengaduanDetailAPIView(RetrieveAPIView):
+#    """API endpoint that returns detail for a single Pengaduan by PK."""
+#    queryset = Pengaduan.objects.all()
+#    serializer_class = PengaduanSerializer
