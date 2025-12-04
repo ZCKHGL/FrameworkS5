@@ -6,6 +6,7 @@ from .models import Warga, Pengaduan
 from django.urls import reverse_lazy
 from .forms import WargaForm, PengaduanForm
 from rest_framework import viewsets  # Impor viewsets untuk DRF
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
 from .serializer import WargaSerializer, PengaduanSerializer
 
 # Create your views here.
@@ -109,6 +110,7 @@ class WargaViewSet(viewsets.ModelViewSet):
     """
     queryset = Warga.objects.all().order_by('-tanggal_registrasi')
     serializer_class = WargaSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class PengaduanViewSet(viewsets.ModelViewSet):
     """
@@ -116,6 +118,7 @@ class PengaduanViewSet(viewsets.ModelViewSet):
     """
     queryset = Pengaduan.objects.all().order_by('-id')
     serializer_class = PengaduanSerializer
+    permission_classes = [IsAdminUser]
 
 #class PengaduanListAPIView(ListAPIView):
 #    queryset = Pengaduan.objects.all()

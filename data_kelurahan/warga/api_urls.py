@@ -1,6 +1,9 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import WargaViewSet, PengaduanViewSet
+from rest_framework.permissions import IsAuthenticated
+from rest_framework import viewsets, routers
+from rest_framework.views import APIView
 
 # Buat sebuah router dan daftarkan ViewSet kita
 router = DefaultRouter()
@@ -16,3 +19,8 @@ urlpatterns = [
     path('', include(router.urls)),
 
 ]
+
+# Pada setiap ViewSet atau APIView, tambahkan:
+class YourViewSet(viewsets.ModelViewSet):[IsAuthenticated]
+    # ...existing code...    # ...existing code...
+
