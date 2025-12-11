@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from .forms import WargaForm, PengaduanForm
 from rest_framework import viewsets  # Impor viewsets untuk DRF
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.filters import SearchFilter, OrderingFilter # Impor ini
 from .serializer import WargaSerializer, PengaduanSerializer
 
 # Create your views here.
@@ -112,6 +113,11 @@ class WargaViewSet(viewsets.ModelViewSet):
     serializer_class = WargaSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
+    # --- Tambahkan konfigurasi di bawah ini ---
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ['nama_lengkap', 'nik', 'alamat']
+    ordering_fields = ['nama_lengkap', 'tanggal_registrasi']
+
 class PengaduanViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -119,6 +125,11 @@ class PengaduanViewSet(viewsets.ModelViewSet):
     queryset = Pengaduan.objects.all().order_by('-id')
     serializer_class = PengaduanSerializer
     permission_classes = [IsAdminUser]
+
+    # --- Tambahkan konfigurasi di bawah ini ---
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ['judul', 'deskripsi']
+    ordering_fields = ['status', 'tanggal_lapor']
 
 #class PengaduanListAPIView(ListAPIView):
 #    queryset = Pengaduan.objects.all()
