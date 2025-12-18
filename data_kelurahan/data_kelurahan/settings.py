@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',  # Tambahkan CORS headers
     'warga',
     'rest_framework.authtoken',
     'django_filters'
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # Tambahkan CORS middleware
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -132,9 +134,17 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        # Untuk development, izinkan akses tanpa autentikasi
+        # Uncomment baris berikut untuk production dengan autentikasi:
+        # 'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',  # Development only!
     ],
     # Tambahkan konfigurasi di bawah ini
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3, # Jumlah item per halaman
 }
+
+# CORS Configuration
+# PERINGATAN: Ini hanya untuk development. Untuk production, gunakan CORS_ALLOWED_ORIGINS
+# dengan list domain spesifik yang diizinkan.
+CORS_ALLOW_ALL_ORIGINS = True

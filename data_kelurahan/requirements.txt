@@ -3,3 +3,9 @@ Django==5.2.8
 djangorestframework==3.16.1
 sqlparse==0.5.3
 tzdata==2025.2
+
+# django-filter provides the `django_filters` package used by DRF filtering
+django-filter
+
+# django-cors-headers allows cross-origin requests from frontend apps
+django-cors-headers
