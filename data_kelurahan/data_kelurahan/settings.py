@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'corsheaders',  # Tambahkan CORS headers
     'warga',
     'rest_framework.authtoken',
-    'django_filters'
+    'django_filters',
+    'drf_spectacular',  # Tambahkan ini
 ]
 
 MIDDLEWARE = [
@@ -142,9 +143,18 @@ REST_FRAMEWORK = {
     # Tambahkan konfigurasi di bawah ini
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 3, # Jumlah item per halaman
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',  # Tambahkan ini
 }
 
 # CORS Configuration
 # PERINGATAN: Ini hanya untuk development. Untuk production, gunakan CORS_ALLOWED_ORIGINS
 # dengan list domain spesifik yang diizinkan.
 CORS_ALLOW_ALL_ORIGINS = True
+
+# drf-spectacular settings
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'API Aplikasi Warga Kelurahan',
+    'DESCRIPTION': 'Dokumentasi API untuk mengelola data warga dan pengaduan.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
